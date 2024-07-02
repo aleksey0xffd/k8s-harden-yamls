@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod9
+spec:
+  securityContext:
+  volumes:
+    - name: sec-ctx-vol
+      emptyDir: {}
+  containers:
+  - name: busybox
+    image: busybox
+    command: [ "sh", "-c", "sleep 1h" ]
+    volumeMounts:
+    - name: sec-ctx-vol
+      mountPath: /data/demo
+    securityContext:
+      seccompProfile:
+        type: RuntimeDefault
